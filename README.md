@@ -3,6 +3,9 @@ Syntax:
 ```py
 await fetch_matches(country, team, timezone=None)
 ```
+*COUNTRY*: The team's origin country
+*TEAM*: Team Name
+*TIMEZONE*: Your specific PYTZ timezone, Defaults to whatever you specify in `DEFAULT_TIMEZONE`
 
 Example Usage:
 
@@ -22,3 +25,6 @@ print([match.__dict__ for match in matches])
   },
     ...
 ]
+```
+
+
