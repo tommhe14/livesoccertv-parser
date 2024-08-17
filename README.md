@@ -1,6 +1,10 @@
-Run "await fetch_matches(country, team, timezone=None)" 
+Syntax:
 
-eg. 
+```py
+await fetch_matches(country, team, timezone=None)
+```
+
+Example Usage:
 
 ```py
 matches = await fetch_matches('england', 'arsenal', timezone='Europe/London')
