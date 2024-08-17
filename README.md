@@ -3,8 +3,8 @@ Syntax:
 ```py
 await fetch_matches(country, team, timezone=None)
 ```
-*COUNTRY*: The team's origin country\n
-*TEAM*: Team Name\n
+*COUNTRY*: The team's origin country
+*TEAM*: Team Name
 *TIMEZONE*: Your specific PYTZ timezone, Defaults to whatever you specify in `DEFAULT_TIMEZONE`
 
 Example Usage:
