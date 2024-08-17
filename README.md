@@ -15,8 +15,8 @@ print([match.__dict__ for match in matches])
     'live': False,
     'played': True,
     'competition': 'Unknown',
-    'time': 'Unknown', 'game':
-    'Arsenal vs AFC Bournemouth',
+    'time': 'Unknown',
+    'game':'Arsenal vs AFC Bournemouth',
     'tvs': ['Bet365', 'Sport TV1', 'Arena Sport 1 Croatia', 'Sport Plus', 'MAXtv To Go'],
     'date': 'Full Time'
   },
