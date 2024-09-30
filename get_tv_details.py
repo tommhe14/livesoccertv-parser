@@ -392,21 +392,18 @@ def fix_lang_code(lang):
     return lang
 
 def get_team_url(country, team):
-    # Ensure proper country code conversion for URL formation
     country_code = fix_country_code(country)
-    return f"{base_url}{country_code.lower()}/{team}/"  # Ensure the slash at the end
+    return f"{base_url}{country_code.lower()}/{team}/"  
 
 async def get_body(session, country, team, timezone):
     url = get_team_url(country, team)
     print(f"Fetching URL: {url}")
-    print(timezone)
     # Handle timezone formatting
     try:
         continent, city = timezone.split('/')
     except ValueError:
         continent, city = 'UTC', 'UTC'
 
-    # Get the country based on the timezone
     country_from_timezone = timezone_to_country.get(timezone, country)
 
     country_code = fix_country_code(country_from_timezone)
@@ -429,7 +426,6 @@ async def get_body(session, country, team, timezone):
 
     async with session.get(url, cookies=cookies, headers=headers) as response:
         print(f"Response status code: {response.status}")
-        print(cookies)
         if response.status == 200:
             return await response.text()
         else:
@@ -447,30 +443,23 @@ def adjust_local_time(time_str, timezone):
 class Match:
     def __init__(self, n, soup):
         match_row = soup.select('tr.matchrow')[n]
-
-        # Extract live status
+        
         self.live = 'livematch' in match_row.get('class', [])
 
-        # Extract played status
         livecell_span = match_row.select_one('td.timecol > div > span.livecell')
         self.played = livecell_span['title'] == 'Match ended' if livecell_span else False
 
-        # Extract competition (from the text inside the <a> tag, if needed)
         self.competition = 'Unknown'
 
-        # Extract date and time
         time_span = match_row.select_one('td.timecol > div > span.ts')
         self.time = time_span.text if time_span else 'Unknown'
 
-        # Extract game details
         game_link = match_row.select_one('td#match a')
         self.game = game_link['title'] if game_link else 'Unknown'
 
-        # Extract TV channels
         tv_links = match_row.select('td#channels a')
         self.tvs = [a.text for a in tv_links if '…' not in a.text]
 
-        # Extract date (if available in the HTML)
         date_span = match_row.select_one('td.timecol > div > span.inprogress')
         self.date = date_span['title'] if date_span and 'title' in date_span.attrs else 'Unknown'
 
